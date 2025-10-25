@@ -1,5 +1,5 @@
 ﻿@page
-@model Idp.Swiyu.IdentityProvider.Pages.Login.LoginModel
+@model Idp.Swiyu.IdentityProvider.Pages.Login.LoginSwiyuMfaModel
 @{
 }
 
@@ -11,9 +11,6 @@
                     <h4 class="mb-0">@ViewData["Title"]</h4>
                 </div>
                 <div class="card-body">
-                    <div>
-                        Register your swiyu first! <a class="btn btn-link" asp-page="/Swiyu/Register">Register E-ID</a>
-                    </div>
                 </div>
             </div>
         </div>
@@ -37,7 +34,7 @@
     {
         <form method="post" id="pollSwiyu" name="pollSwiyu">
             <input type="hidden" asp-for="ReturnUrl" />
-            <input type="hidden" id="verificationId" name="verificationId"  asp-for="VerificationId" />
+            <input type="hidden" id="verificationId" name="verificationId" asp-for="VerificationId" />
             <button style="display:none;" type="submit" id="buttonPollSwiyu" name="buttonPollSwiyu" class="btn btn-outline-dark">Start polling</button>
         </form>
     }

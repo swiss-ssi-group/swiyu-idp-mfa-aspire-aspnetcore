@@ -16,7 +16,7 @@ using System.Text.Json;
 namespace Idp.Swiyu.IdentityProvider.Pages.Login;
 
 [AllowAnonymous]
-public class LoginModel : PageModel
+public class LoginSwiyuMfaModel : PageModel
 {
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly SignInManager<ApplicationUser> _signInManager;
@@ -42,7 +42,7 @@ public class LoginModel : PageModel
     [BindProperty]
     public byte[]? QrCodePng { get; set; } = [];
 
-    public LoginModel(
+    public LoginSwiyuMfaModel(
         IIdentityServerInteractionService interaction,
         IAuthenticationSchemeProvider schemeProvider,
         IIdentityProviderStore identityProviderStore,

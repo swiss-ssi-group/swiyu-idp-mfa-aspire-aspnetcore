@@ -3,7 +3,9 @@ using Duende.IdentityServer.Events;
 using Duende.IdentityServer.Models;
 using Duende.IdentityServer.Services;
 using Duende.IdentityServer.Stores;
+using Idp.Swiyu.IdentityProvider.Data;
 using Idp.Swiyu.IdentityProvider.Models;
+using Idp.Swiyu.IdentityProvider.SwiyuServices;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -22,6 +24,7 @@ public class Index : PageModel
     private readonly IEventService _events;
     private readonly IAuthenticationSchemeProvider _schemeProvider;
     private readonly IIdentityProviderStore _identityProviderStore;
+    private readonly ApplicationDbContext _applicationDbContext;
 
     public ViewModel View { get; set; } = default!;
 
@@ -34,7 +37,8 @@ public class Index : PageModel
         IIdentityProviderStore identityProviderStore,
         IEventService events,
         UserManager<ApplicationUser> userManager,
-        SignInManager<ApplicationUser> signInManager)
+        SignInManager<ApplicationUser> signInManager,
+        ApplicationDbContext applicationDbContext)
     {
         _userManager = userManager;
         _signInManager = signInManager;
@@ -42,6 +46,7 @@ public class Index : PageModel
         _schemeProvider = schemeProvider;
         _identityProviderStore = identityProviderStore;
         _events = events;
+        _applicationDbContext = applicationDbContext;
     }
 
     public async Task<IActionResult> OnGet(string? returnUrl)
@@ -135,11 +140,32 @@ public class Index : PageModel
                     throw new ArgumentException("invalid return URL");
                 }
             }
+            if (result.RequiresTwoFactor)
+            {
+                var user = await _userManager.FindByEmailAsync(Input.Username!);
 
-            const string error = "invalid credentials";
-            await _events.RaiseAsync(new UserLoginFailureEvent(Input.Username, error, clientId: context?.Client.ClientId));
-            Telemetry.Metrics.UserLoginFailure(context?.Client.ClientId, IdentityServerConstants.LocalIdentityProvider, error);
-            ModelState.AddModelError(string.Empty, LoginOptions.InvalidCredentialsErrorMessage);
+                var exists = _applicationDbContext.SwiyuIdentity.FirstOrDefault(c => c.UserId == user!.Id);
+
+                if (exists != null)
+                {
+                    return RedirectToPage("../LoginSwiyuMfa", new { ReturnUrl = Input.ReturnUrl, Input.RememberLogin });
+                }
+
+                return RedirectToPage("../LoginWith2fa", new { ReturnUrl = Input.ReturnUrl, Input.RememberLogin });
+            }
+            if (result.IsLockedOut)
+            {
+                return RedirectToPage("../Lockout");
+            }
+            else
+            {
+                const string error = "invalid credentials";
+                await _events.RaiseAsync(new UserLoginFailureEvent(Input.Username, error, clientId: context?.Client.ClientId));
+                Telemetry.Metrics.UserLoginFailure(context?.Client.ClientId, IdentityServerConstants.LocalIdentityProvider, error);
+                ModelState.AddModelError(string.Empty, LoginOptions.InvalidCredentialsErrorMessage);
+
+                return Page();
+            }
         }
 
         // something went wrong, show form with error
