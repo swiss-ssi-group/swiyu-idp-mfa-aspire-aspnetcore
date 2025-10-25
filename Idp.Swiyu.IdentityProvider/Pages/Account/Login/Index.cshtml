@@ -23,30 +23,34 @@
                         <form asp-page="/Account/Login/Index">
                             <input type="hidden" asp-for="Input.ReturnUrl" />
 
-                            <div class="form-group">
-                                <label asp-for="Input.Username"></label>
-                                <input class="form-control" placeholder="Username" asp-for="Input.Username" autofocus>
+                            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                            <div class="form-floating mb-3">
+                                <input asp-for="Input.Username" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+                                <label asp-for="Input.Username" class="form-label">Email</label>
+                                <span asp-validation-for="Input.Username" class="text-danger"></span>
                             </div>
-                            <div class="form-group">
-                                <label asp-for="Input.Password"></label>
-                                <input type="password" class="form-control" placeholder="Password" asp-for="Input.Password" autocomplete="off">
+                            <div class="form-floating mb-3">
+                                <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" placeholder="password" />
+                                <label asp-for="Input.Password" class="form-label">Password</label>
+                                <span asp-validation-for="Input.Password" class="text-danger"></span>
                             </div>
-                            
+
                             @if (Model.View.AllowRememberLogin)
                             {
-                                <div class="form-group">
-                                    <div class="form-check">
-                                        <input class="form-check-input" asp-for="Input.RememberLogin">
-                                        <label class="form-check-label" asp-for="Input.RememberLogin">
-                                            Remember My Login
-                                        </label>
-                                    </div>
+                                <div class="checkbox mb-3">
+                                    <label asp-for="Input.RememberLogin" class="form-label">
+                                        <input class="form-check-input" asp-for="Input.RememberLogin" />
+                                        @Html.DisplayNameFor(m => m.Input.RememberLogin)
+                                    </label>
                                 </div>
                             }
-                            
-                            <button class="btn btn-primary" name="Input.Button" value="login">Login</button>
-                            <button class="btn btn-secondary" name="Input.Button" value="cancel">Cancel</button>
 
+                            <div>
+                                <button class="btn btn-lg btn-primary" name="Input.Button" value="login">Login</button>
+                            </div>
+                            <div>
+                                <button class="btn btn-lg btn-secondary" name="Input.Button" value="cancel">Cancel</button>
+                            </div>
                             <div>
                                 <p>
                                     <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
