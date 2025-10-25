@@ -13,7 +13,7 @@ using Idp.Swiyu.IdentityProvider.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 
-namespace Idp.Swiyu.IdentityProvider.Areas.Identity.Pages.Account
+namespace Idp.Swiyu.IdentityProvider.Pages.Account
 {
     public class LoginWith2faModel : PageModel
     {

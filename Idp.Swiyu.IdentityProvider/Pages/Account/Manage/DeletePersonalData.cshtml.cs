@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 
-namespace Idp.Swiyu.IdentityProvider.Areas.Identity.Pages.Account.Manage
+namespace Idp.Swiyu.IdentityProvider.Pages.Account.Manage
 {
     public class DeletePersonalDataModel : PageModel
     {

@@ -15,7 +15,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 
-namespace Idp.Swiyu.IdentityProvider.Areas.Identity.Pages.Account
+namespace Idp.Swiyu.IdentityProvider.Pages.Account
 {
     public class ForgotPasswordModel : PageModel
     {
