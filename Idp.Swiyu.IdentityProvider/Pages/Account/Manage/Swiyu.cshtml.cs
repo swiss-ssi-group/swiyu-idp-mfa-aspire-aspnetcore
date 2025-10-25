@@ -6,10 +6,10 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Net.Codecrete.QrCodeGenerator;
 using System.Text.Json;
 
-namespace Idp.Swiyu.IdentityProvider.Pages.Swiyu;
+namespace Idp.Swiyu.IdentityProvider.Pages.Account.Manage;
 
 [Authorize]
-public class RegisterModel : PageModel
+public class RegisterSwiyuModel : PageModel
 {
     private readonly VerificationService _verificationService;
     private readonly string? _swiyuOid4vpUrl;
@@ -23,7 +23,7 @@ public class RegisterModel : PageModel
     [BindProperty]
     public byte[] QrCodePng { get; set; } = [];
 
-    public RegisterModel(VerificationService verificationService,
+    public RegisterSwiyuModel(VerificationService verificationService,
         IConfiguration configuration)
     {
         _verificationService = verificationService;

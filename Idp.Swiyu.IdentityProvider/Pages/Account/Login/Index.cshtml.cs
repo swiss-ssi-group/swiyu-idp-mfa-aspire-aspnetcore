@@ -148,7 +148,7 @@ public class Index : PageModel
 
                 if (exists != null)
                 {
-                    return RedirectToPage("../LoginSwiyuMfa", new { ReturnUrl = Input.ReturnUrl, Input.RememberLogin });
+                    return RedirectToPage("../LoginSwiyuMfa", new { Input.ReturnUrl, Input.RememberLogin });
                 }
 
                 return RedirectToPage("../LoginWith2fa", new { ReturnUrl = Input.ReturnUrl, Input.RememberLogin });
