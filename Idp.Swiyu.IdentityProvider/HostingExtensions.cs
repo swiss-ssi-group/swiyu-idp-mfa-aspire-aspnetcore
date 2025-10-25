@@ -1,7 +1,9 @@
 using Idp.Swiyu.IdentityProvider.Data;
 using Idp.Swiyu.IdentityProvider.Models;
+using Idp.Swiyu.IdentityProvider.Services;
 using Idp.Swiyu.IdentityProvider.SwiyuServices;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using Serilog.Filters;
@@ -52,6 +54,9 @@ internal static class HostingExtensions
         builder.AddRedisOutputCache("cache");
 
         builder.Services.AddScoped<VerificationService>();
+
+        builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
+        builder.Services.AddTransient<IEmailSender, EmailSender>();
 
         builder.Services.AddHttpClient();
         builder.Services.AddOptions();
