@@ -70,6 +70,8 @@ public class Program
         builder.Services.AddAuthorization();
         builder.Services.AddCascadingAuthenticationState();
 
+        builder.Services.AddHealthChecks();
+
         var app = builder.Build();
 
         if (!app.Environment.IsDevelopment())
@@ -95,6 +97,8 @@ public class Program
             .AddInteractiveServerRenderMode();
 
         app.MapLoginLogoutEndpoints();
+
+        app.MapHealthChecks("/health");
 
         app.Run();
     }
