@@ -28,7 +28,7 @@ public class LoginSwiyuMfaModel : PageModel
     private readonly ApplicationDbContext _applicationDbContext;
 
     [BindProperty]
-    public string ReturnUrl { get; set; } = default!;
+    public string? ReturnUrl { get; set; }
 
     private readonly VerificationService _verificationService;
     private readonly string? _swiyuOid4vpUrl;
@@ -145,11 +145,24 @@ public class LoginSwiyuMfaModel : PageModel
                         {
                             // The client is native, so this change in how to
                             // return the response is for better UX for the end user.
-                            return this.LoadingPage(ReturnUrl);
+                            return this.LoadingPage(ReturnUrl ?? "~/");
                         }
                     }
 
-                    return Redirect(ReturnUrl);
+                    // request for a local page
+                    if (Url.IsLocalUrl(ReturnUrl))
+                    {
+                        return Redirect(ReturnUrl);
+                    }
+                    else if (string.IsNullOrEmpty(ReturnUrl))
+                    {
+                        return Redirect("~/");
+                    }
+                    else
+                    {
+                        // user might have clicked on a malicious link - should be logged
+                        throw new ArgumentException("invalid return URL");
+                    }
                 }
             }
         }
