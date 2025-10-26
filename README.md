@@ -1,4 +1,42 @@
 # swiyu Duende IDP MFA Aspire ASP.NET Core
 
+## Getting started:
+
+- [swiyu](https://swiyu-admin-ch.github.io/cookbooks/onboarding-base-and-trust-registry/)
+- [Dev docs](DEV.md)
+- [Changelog](CHANGELOG.md)
+
+## Used OSS packages, containers, repositories 
+
+- ImageMagick: https://github.com/manuelbl/QrCodeGenerator/tree/master/Demo-ImageMagick
+- Microsoft Aspire: https://learn.microsoft.com/en-us/dotnet/aspire/get-started/aspire-overview
+- Net.Codecrete.QrCodeGenerator: https://github.com/manuelbl/QrCodeGenerator/
+- swiyu
+  - https://github.com/swiyu-admin-ch/swiyu-verifier
+
+## Register Flow
+
+Used data:  given_name, family_name, birth_date and birth_place.
+
+1. User has already an account and would like to attach an E-ID for authentication
+2. User registers MFA swiyu
+3. User validates authentication using E-ID
+4. User authenticates using password and swiyu
+
+> Note: authentication uses E-ID is NOT phishing resistant. Passkeys would be better.
+
+## Authentication Flow
+
+> Note: authentication uses E-ID is NOT phishing resistant. Passkeys would be better.
+
+## Recovery flow (name change)
+
+## 2FA flow
+
+## Password reset flow
+
 ## Links
 
+https://swiyu-admin-ch.github.io/cookbooks/how-to-use-beta-id/
+
+https://swiyu-admin-ch.github.io/cookbooks/onboarding-generic-verifier/
