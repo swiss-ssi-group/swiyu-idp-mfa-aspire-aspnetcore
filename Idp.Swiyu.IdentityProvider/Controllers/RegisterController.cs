@@ -84,7 +84,6 @@ public class RegisterController : ControllerBase
                 {
                     throw new Exception("swiyu, could not add, unknown error...");
                 }
-
             }
 
             return Ok(verificationModel);
