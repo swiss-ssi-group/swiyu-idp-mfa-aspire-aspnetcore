@@ -77,6 +77,8 @@ public class RegisterController : ControllerBase
                     user.SwiyuIdentityId = swiyuIdentity.Id;
 
                     await _applicationDbContext.SaveChangesAsync();
+
+                    await _userManager.SetTwoFactorEnabledAsync(user, true);
                 }
             }
 
