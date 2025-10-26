@@ -6,6 +6,12 @@
 - [Dev docs](DEV.md)
 - [Changelog](CHANGELOG.md)
 
+## Overview 
+A Duende identity server is used as an OpenID Connect server for web applications. When the user authenticates, the Swiss E-ID can be used as a second factor to authenticate.
+The applications are implemented using Aspire, ASP.NET Core and the Swiss public beta generic containers. The containers implement the OpenID verifiable credential standards and provide a simple API to integrate applications. Using swiyu is simple, but not a good way of doing authentication as it is not phishing resistant.
+
+![Architecture](https://github.com/swiss-ssi-group/swiyu-idp-mfa-aspire-aspnetcore/blob/main/images/overview.drawio.png)
+
 ## Used OSS packages, containers, repositories 
 
 - ImageMagick: https://github.com/manuelbl/QrCodeGenerator/tree/master/Demo-ImageMagick
