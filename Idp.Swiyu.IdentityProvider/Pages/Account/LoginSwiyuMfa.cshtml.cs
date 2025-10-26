@@ -137,9 +137,8 @@ public class LoginSwiyuMfaModel : PageModel
                         throw new ArgumentNullException("error in authentication");
                     }
 
-                    // issue authentication cookie for user
-                    await _signInManager.SignInWithClaimsAsync(user, null, claims);
-
+                    var result = await _signInManager.TwoFactorSignInAsync("swiyu", string.Empty, false, false);
+                   
                     if (context != null)
                     {
                         if (context.IsNativeClient())
