@@ -66,6 +66,15 @@
     }
 }
 
+@if(Model.HasSwiyuMfa)
+{
+    <a id="enable-swiyu" asp-page="./DisableSwiyu" class="btn btn-secondary">Disable Swiyu MFA</a>
+}
+else
+{
+    <a id="enable-swiyu" asp-page="./Swiyu" class="btn btn-primary">Add Swiyu MFA</a>}
+
+
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }

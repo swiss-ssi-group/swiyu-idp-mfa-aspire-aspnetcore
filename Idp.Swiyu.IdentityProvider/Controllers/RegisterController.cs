@@ -2,6 +2,7 @@
 using Idp.Swiyu.IdentityProvider.Data;
 using Idp.Swiyu.IdentityProvider.Models;
 using Idp.Swiyu.IdentityProvider.SwiyuServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Mail;
@@ -55,10 +56,10 @@ public class RegisterController : ControllerBase
 
                 if (exists != null)
                 {
-                    throw new Exception("Swiyu already in use and connected to an account...");
+                    throw new Exception("swiyu already in use and connected to an account...");
                 }
 
-                if (user != null && user.SwiyuIdentityId <= 0)
+                if (user != null && user != null && (user.SwiyuIdentityId == null || user.SwiyuIdentityId <= 0))
                 {
                     var swiyuIdentity = new SwiyuIdentity
                     {
@@ -76,6 +77,12 @@ public class RegisterController : ControllerBase
                     user.SwiyuIdentityId = swiyuIdentity.Id;
 
                     await _applicationDbContext.SaveChangesAsync();
+
+                    await _userManager.SetTwoFactorEnabledAsync(user, true);
+                }
+                else 
+                {
+                    throw new Exception("swiyu, could not add, unknown error...");
                 }
             }
 

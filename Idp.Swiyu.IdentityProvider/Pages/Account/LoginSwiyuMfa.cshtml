@@ -1,23 +1,9 @@
 ﻿@page
-@model Idp.Swiyu.IdentityProvider.Pages.Login.LoginModel
+@model Idp.Swiyu.IdentityProvider.Pages.Login.LoginSwiyuMfaModel
 @{
 }
 
 <div class="container my-5">
-    <div class="row justify-content-center" id="verifiedDataButton">
-        <div class="col-md-8">
-            <div class="card shadow-sm">
-                <div class="card-header bg-primary-card text-white">
-                    <h4 class="mb-0">@ViewData["Title"]</h4>
-                </div>
-                <div class="card-body">
-                    <div>
-                        Register your swiyu first! <a class="btn btn-link" asp-page="/Swiyu/Register">Register E-ID</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
     @if (Model.QrCodePng!.Length > 0)
     {
@@ -25,7 +11,7 @@
             <div class="col-md-8 text-center">
                 <div class="card shadow-sm">
                     <div class="card-body">
-                        <h5 class="card-title">QR Code</h5>
+                        <h5 class="card-title">Scan using your swiyu wallet</h5>
                         <img alt="qr code" width="300" src="data:image;base64,@System.Convert.ToBase64String(Model.QrCodePng)" class="img-fluid" />
                     </div>
                 </div>
@@ -37,7 +23,7 @@
     {
         <form method="post" id="pollSwiyu" name="pollSwiyu">
             <input type="hidden" asp-for="ReturnUrl" />
-            <input type="hidden" id="verificationId" name="verificationId"  asp-for="VerificationId" />
+            <input type="hidden" id="verificationId" name="verificationId" asp-for="VerificationId" />
             <button style="display:none;" type="submit" id="buttonPollSwiyu" name="buttonPollSwiyu" class="btn btn-outline-dark">Start polling</button>
         </form>
     }

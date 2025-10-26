@@ -16,7 +16,7 @@ using System.Text.Json;
 namespace Idp.Swiyu.IdentityProvider.Pages.Login;
 
 [AllowAnonymous]
-public class LoginModel : PageModel
+public class LoginSwiyuMfaModel : PageModel
 {
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly SignInManager<ApplicationUser> _signInManager;
@@ -28,7 +28,7 @@ public class LoginModel : PageModel
     private readonly ApplicationDbContext _applicationDbContext;
 
     [BindProperty]
-    public string ReturnUrl { get; set; } = default!;
+    public string? ReturnUrl { get; set; }
 
     private readonly VerificationService _verificationService;
     private readonly string? _swiyuOid4vpUrl;
@@ -42,7 +42,7 @@ public class LoginModel : PageModel
     [BindProperty]
     public byte[]? QrCodePng { get; set; } = [];
 
-    public LoginModel(
+    public LoginSwiyuMfaModel(
         IIdentityServerInteractionService interaction,
         IAuthenticationSchemeProvider schemeProvider,
         IIdentityProviderStore identityProviderStore,
@@ -137,20 +137,32 @@ public class LoginModel : PageModel
                         throw new ArgumentNullException("error in authentication");
                     }
 
-                    // issue authentication cookie for user
-                    await _signInManager.SignInWithClaimsAsync(user, null, claims);
-
+                    var result = await _signInManager.TwoFactorSignInAsync(SwiyuConsts.SWIYU, string.Empty, false, false);
+                   
                     if (context != null)
                     {
                         if (context.IsNativeClient())
                         {
                             // The client is native, so this change in how to
                             // return the response is for better UX for the end user.
-                            return this.LoadingPage(ReturnUrl);
+                            return this.LoadingPage(ReturnUrl ?? "~/");
                         }
                     }
 
-                    return Redirect(ReturnUrl);
+                    // request for a local page
+                    if (Url.IsLocalUrl(ReturnUrl))
+                    {
+                        return Redirect(ReturnUrl);
+                    }
+                    else if (string.IsNullOrEmpty(ReturnUrl))
+                    {
+                        return Redirect("~/");
+                    }
+                    else
+                    {
+                        // user might have clicked on a malicious link - should be logged
+                        throw new ArgumentException("invalid return URL");
+                    }
                 }
             }
         }

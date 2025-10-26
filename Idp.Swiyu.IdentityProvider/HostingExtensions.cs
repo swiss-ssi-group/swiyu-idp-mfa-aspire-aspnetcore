@@ -69,6 +69,7 @@ internal static class HostingExtensions
 
         builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
             .AddEntityFrameworkStores<ApplicationDbContext>()
+            .AddTokenProvider<SwiyuUserTwoFactorTokenProvider>(SwiyuConsts.SWIYU)
             .AddDefaultTokenProviders();
 
         builder.Services
