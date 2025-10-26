@@ -137,7 +137,7 @@ public class LoginSwiyuMfaModel : PageModel
                         throw new ArgumentNullException("error in authentication");
                     }
 
-                    var result = await _signInManager.TwoFactorSignInAsync("swiyu", string.Empty, false, false);
+                    var result = await _signInManager.TwoFactorSignInAsync(SwiyuConsts.SWIYU, string.Empty, false, false);
                    
                     if (context != null)
                     {

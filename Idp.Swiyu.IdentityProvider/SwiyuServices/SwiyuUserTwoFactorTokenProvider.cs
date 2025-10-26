@@ -12,7 +12,7 @@ public class SwiyuUserTwoFactorTokenProvider : IUserTwoFactorTokenProvider<Appli
 
     public Task<string> GenerateAsync(string purpose, UserManager<ApplicationUser> manager, ApplicationUser user)
     {
-        return Task.FromResult("swiyu");
+        return Task.FromResult(SwiyuConsts.SWIYU);
     }
 
     public Task<bool> ValidateAsync(string purpose, string token, UserManager<ApplicationUser> manager, ApplicationUser user)
