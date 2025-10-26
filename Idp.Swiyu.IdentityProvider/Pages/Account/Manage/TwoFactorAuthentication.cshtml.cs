@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 #nullable disable
 
+using Idp.Swiyu.IdentityProvider.Data;
 using Idp.Swiyu.IdentityProvider.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -14,13 +15,17 @@ public class TwoFactorAuthenticationModel : PageModel
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly SignInManager<ApplicationUser> _signInManager;
     private readonly ILogger<TwoFactorAuthenticationModel> _logger;
+    private readonly ApplicationDbContext _applicationDbContext;
 
     public TwoFactorAuthenticationModel(
-        UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, ILogger<TwoFactorAuthenticationModel> logger)
+        UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager,
+        ApplicationDbContext applicationDbContext,
+        ILogger<TwoFactorAuthenticationModel> logger)
     {
         _userManager = userManager;
         _signInManager = signInManager;
         _logger = logger;
+        _applicationDbContext = applicationDbContext;
     }
 
     /// <summary>
@@ -28,6 +33,8 @@ public class TwoFactorAuthenticationModel : PageModel
     ///     directly from your code. This API may change or be removed in future releases.
     /// </summary>
     public bool HasAuthenticator { get; set; }
+
+    public bool HasSwiyuMfa { get; set; }
 
     /// <summary>
     ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
@@ -67,6 +74,12 @@ public class TwoFactorAuthenticationModel : PageModel
         Is2faEnabled = await _userManager.GetTwoFactorEnabledAsync(user);
         IsMachineRemembered = await _signInManager.IsTwoFactorClientRememberedAsync(user);
         RecoveryCodesLeft = await _userManager.CountRecoveryCodesAsync(user);
+
+        var swiyuMfa = _applicationDbContext.SwiyuIdentity.FirstOrDefault(c => c.UserId == user!.Id);
+        if(swiyuMfa != null)
+        {
+            HasSwiyuMfa = true;
+        }
 
         return Page();
     }
