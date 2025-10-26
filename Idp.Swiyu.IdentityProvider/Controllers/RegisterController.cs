@@ -2,6 +2,7 @@
 using Idp.Swiyu.IdentityProvider.Data;
 using Idp.Swiyu.IdentityProvider.Models;
 using Idp.Swiyu.IdentityProvider.SwiyuServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Mail;
