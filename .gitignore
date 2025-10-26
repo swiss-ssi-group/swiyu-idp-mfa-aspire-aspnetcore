@@ -417,3 +417,5 @@ FodyWeavers.xsd
 *.msm
 *.msp
 /Idp.Swiyu.IdentityProvider/keys/**
+/Idp.Swiyu.IdentityProvider/AspIdUsers.db-shm
+/Idp.Swiyu.IdentityProvider/AspIdUsers.db-wal
