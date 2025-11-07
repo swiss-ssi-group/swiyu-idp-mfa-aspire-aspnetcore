@@ -26,7 +26,7 @@ The applications are implemented using Aspire, ASP.NET Core and the Swiss public
 - swiyu
   - https://github.com/swiyu-admin-ch/swiyu-verifier
 
-## Register Flow
+## Register Flow (Authentication Flow using password and MFA (swiyu direct))
 
 Used data:  given_name, family_name, birth_date and birth_place.
 
@@ -37,7 +37,14 @@ Used data:  given_name, family_name, birth_date and birth_place.
 
 > Note: authentication uses E-ID is NOT phishing resistant. Passkeys would be better.
 
-## Authentication Flow
+## Login FLow
+
+1. User enters username (email)
+2. User enters email
+3. User verifies using swiyu, validates against DB
+4. Sign-in and create cookie
+
+## Authentication Flow (swiyu direct)
 
 > Note: authentication uses E-ID is NOT phishing resistant. Passkeys would be better.
 
@@ -52,3 +59,7 @@ Used data:  given_name, family_name, birth_date and birth_place.
 https://swiyu-admin-ch.github.io/cookbooks/how-to-use-beta-id/
 
 https://swiyu-admin-ch.github.io/cookbooks/onboarding-generic-verifier/
+
+https://damienbod.com/2022/10/17/is-scanning-qr-codes-for-authentication-safe/
+
+https://damienbod.com/2022/02/14/problems-with-online-user-authentication-when-using-self-sovereign-identity/
