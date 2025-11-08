@@ -3,6 +3,7 @@
 #nullable disable
 
 using Idp.Swiyu.IdentityProvider.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -12,6 +13,7 @@ using System.Text;
 
 namespace Idp.Swiyu.IdentityProvider.Pages.Account;
 
+[AllowAnonymous]
 public class ResetPasswordModel : PageModel
 {
     private readonly UserManager<ApplicationUser> _userManager;
