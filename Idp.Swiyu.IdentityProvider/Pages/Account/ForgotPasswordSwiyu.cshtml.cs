@@ -9,8 +9,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.WebUtilities;
 using Net.Codecrete.QrCodeGenerator;
 using System.Security.Claims;
+using System.Text;
 using System.Text.Json;
 
 namespace Idp.Swiyu.IdentityProvider.Pages.ForgotPassword;
@@ -138,8 +140,17 @@ public class ForgotPasswordSwiyuModel : PageModel
                     }
 
                     // TODO reset password and redirect
-                   
-                    Redirect("~/");
+
+                    var code = await _userManager.GeneratePasswordResetTokenAsync(user);
+                    code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+
+                    var callbackUrl = Url.Page(
+                        "/Account/ResetPassword",
+                        pageHandler: null,
+                        values: new { area = "Identity", code },
+                        protocol: Request.Scheme);
+
+                    Redirect(callbackUrl!);
                 }
             }
         }
