@@ -139,8 +139,6 @@ public class ForgotPasswordSwiyuModel : PageModel
                         throw new ArgumentNullException("error in authentication");
                     }
 
-                    // TODO reset password and redirect
-
                     var code = await _userManager.GeneratePasswordResetTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
 
