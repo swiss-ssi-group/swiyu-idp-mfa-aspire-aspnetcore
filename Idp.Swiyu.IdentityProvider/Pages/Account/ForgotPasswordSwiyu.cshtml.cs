@@ -148,7 +148,7 @@ public class ForgotPasswordSwiyuModel : PageModel
                         values: new { area = "Identity", code },
                         protocol: Request.Scheme);
 
-                    Redirect(callbackUrl!);
+                    return Redirect(callbackUrl!);
                 }
             }
         }
