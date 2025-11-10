@@ -1,5 +1,7 @@
 # swiyu Duende IDP MFA Aspire ASP.NET Core
 
+[![.NET](https://github.com/swiss-ssi-group/swiyu-idp-mfa-aspire-aspnetcore/actions/workflows/dotnet.yml/badge.svg)](https://github.com/swiss-ssi-group/swiyu-idp-mfa-aspire-aspnetcore/actions/workflows/dotnet.yml)
+
 ## Getting started:
 
 - [swiyu](https://swiyu-admin-ch.github.io/cookbooks/onboarding-base-and-trust-registry/)
