@@ -1,5 +1,7 @@
 # swiyu Duende IDP MFA Aspire ASP.NET Core
 
+[![.NET](https://github.com/swiss-ssi-group/swiyu-idp-mfa-aspire-aspnetcore/actions/workflows/dotnet.yml/badge.svg)](https://github.com/swiss-ssi-group/swiyu-idp-mfa-aspire-aspnetcore/actions/workflows/dotnet.yml)
+
 ## Getting started:
 
 - [swiyu](https://swiyu-admin-ch.github.io/cookbooks/onboarding-base-and-trust-registry/)
@@ -10,7 +12,7 @@
 
 - [Issue and verify credentials using the Swiss Digital identity public beta, ASP.NET Core and .NET Aspire](https://damienbod.com/2025/08/04/issuer-and-verify-credentials-using-the-swiss-digital-identity-public-beta-asp-net-core-and-net-aspire/)
 - [Use swiyu, the Swiss E-ID to authenticate users with Duende and .NET Aspire](https://damienbod.com/2025/10/27/use-swiyu-the-swiss-e-id-to-authenticate-users-with-duende-and-net-aspire/)
-- [Implement MFA using swiyu, the Swiss E-ID with Duende IdentityServer, ASP.NET Core Identity and .NET Aspire](https://damienbod.com)
+- [Implement MFA using swiyu, the Swiss E-ID with Duende IdentityServer, ASP.NET Core Identity and .NET Aspire](https://damienbod.com/2025/11/10/implement-mfa-using-swiyu-the-swiss-e-id-with-duende-identityserver-asp-net-core-identity-and-net-aspire/)
 
 ## Overview 
 A Duende identity server is used as an OpenID Connect server for web applications. When the user authenticates, the Swiss E-ID can be used as a second factor to authenticate.
@@ -37,7 +39,7 @@ Used data:  given_name, family_name, birth_date and birth_place.
 
 > Note: authentication uses E-ID is NOT phishing resistant. Passkeys would be better.
 
-## Login FLow
+## Login Flow
 
 1. User enters username (email)
 2. User enters email
