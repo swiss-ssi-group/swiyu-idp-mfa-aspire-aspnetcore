@@ -39,7 +39,7 @@ Used data:  given_name, family_name, birth_date and birth_place.
 
 > Note: authentication uses E-ID is NOT phishing resistant. Passkeys would be better.
 
-## Login FLow
+## Login Flow
 
 1. User enters username (email)
 2. User enters email
