@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Aspire.StackExchange.Redis.OutputCaching" Version="9.5.2" />
+    <PackageReference Include="Aspire.StackExchange.Redis.OutputCaching" Version="13.1.0-preview.1.25561.3" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="9.0.10" />
     <PackageReference Include="NetEscapades.AspNetCore.SecurityHeaders" Version="1.2.0" />
   </ItemGroup>
