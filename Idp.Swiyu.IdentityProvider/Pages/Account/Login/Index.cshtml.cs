@@ -163,8 +163,6 @@ public class Index : PageModel
                 await _events.RaiseAsync(new UserLoginFailureEvent(Input.Username, error, clientId: context?.Client.ClientId));
                 Telemetry.Metrics.UserLoginFailure(context?.Client.ClientId, IdentityServerConstants.LocalIdentityProvider, error);
                 ModelState.AddModelError(string.Empty, LoginOptions.InvalidCredentialsErrorMessage);
-
-                return Page();
             }
         }
 
