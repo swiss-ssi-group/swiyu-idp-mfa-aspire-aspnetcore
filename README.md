@@ -64,10 +64,12 @@ See ForgotPasswordSwiyu Razor page.
 
 Details in blog.
 
-
 ## Onboarding Flow (swiyu generic verifier)
 
 ## Use Swiyu together with passkeys
+
+## Step up authentication
+
 
 ## Links
 
