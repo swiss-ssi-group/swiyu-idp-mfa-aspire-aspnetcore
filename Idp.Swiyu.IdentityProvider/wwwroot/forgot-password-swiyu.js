@@ -10,7 +10,8 @@ if (verificationId != null) {
             if (form) {
                 form.submit();
             }
-            clearInterval(checkStatus)
+
+            clearInterval(checkStatus);
         }
     }, 1500);
 }
