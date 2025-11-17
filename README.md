@@ -54,7 +54,20 @@ Used data:  given_name, family_name, birth_date and birth_place.
 
 ## 2FA flow
 
+See Pages/Account/Manage/Swiyu.cshtml
+
+Details in blog.
+
 ## Password reset flow
+
+See ForgotPasswordSwiyu Razor page.
+
+Details in blog.
+
+
+## Onboarding Flow (swiyu generic verifier)
+
+## Use Swiyu together with passkeys
 
 ## Links
 
