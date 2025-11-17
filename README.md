@@ -25,8 +25,7 @@ The applications are implemented using Aspire, ASP.NET Core and the Swiss public
 - ImageMagick: https://github.com/manuelbl/QrCodeGenerator/tree/master/Demo-ImageMagick
 - Microsoft Aspire: https://learn.microsoft.com/en-us/dotnet/aspire/get-started/aspire-overview
 - Net.Codecrete.QrCodeGenerator: https://github.com/manuelbl/QrCodeGenerator/
-- swiyu
-  - https://github.com/swiyu-admin-ch/swiyu-verifier
+- swiyu https://github.com/swiyu-admin-ch/swiyu-verifier
 
 ## Register Flow (Authentication Flow using password and MFA (swiyu direct))
 
