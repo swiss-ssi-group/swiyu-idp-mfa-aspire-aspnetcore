@@ -68,7 +68,7 @@ public class ForgotPasswordSwiyuModel : PageModel
 
         _verificationService = verificationService;
         _swiyuOid4vpUrl = configuration["SwiyuOid4vpUrl"];
-        QrCodeUrl = QrCodeUrl.Replace("{OID4VP_URL}", _swiyuOid4vpUrl);
+        QrCodeUrl = QrCodeUrl.Replace("{OID4VP_URL}", _swiyuOid4vpUrl ?? string.Empty);
     }
 
     public async Task<IActionResult> OnGet(string? returnUrl)
