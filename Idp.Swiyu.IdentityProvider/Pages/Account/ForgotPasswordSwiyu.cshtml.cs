@@ -160,13 +160,10 @@ public class ForgotPasswordSwiyuModel : PageModel
         return Page();
     }
 
-    internal async Task<VerificationManagementModel> RequestSwiyuClaimsAsync(int interval, string verificationId)
+    private async Task<VerificationManagementModel> RequestSwiyuClaimsAsync(int interval, string verificationId)
     {
-        var client = _clientFactory.CreateClient();
-
         while (true)
         {
-
             var verificationModel = await _verificationService.GetVerificationStatus(verificationId);
 
             if (verificationModel != null && verificationModel.state == "SUCCESS")
