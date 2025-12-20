@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.14.36518.9
+# Visual Studio Version 18
+VisualStudioVersion = 18.0.11222.15 d18.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Idp.Swiyu.AppHost", "Idp.Swiyu.AppHost\Idp.Swiyu.AppHost.csproj", "{78DFBBD5-FF6E-4EDE-94CC-5526169C9BB3}"
 EndProject
