@@ -70,7 +70,6 @@ Details in blog.
 
 ## Step up authentication
 
-
 ## Links
 
 https://swiyu-admin-ch.github.io/cookbooks/how-to-use-beta-id/
