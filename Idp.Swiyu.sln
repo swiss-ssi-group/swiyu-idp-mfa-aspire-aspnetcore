@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 18
-VisualStudioVersion = 18.0.11222.15 d18.0
+VisualStudioVersion = 18.0.11222.15
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Idp.Swiyu.AppHost", "Idp.Swiyu.AppHost\Idp.Swiyu.AppHost.csproj", "{78DFBBD5-FF6E-4EDE-94CC-5526169C9BB3}"
 EndProject
@@ -16,6 +16,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		DEV.md = DEV.md
 		README.md = README.md
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Swiyu.Endpoints.Proxy", "..\swiyu-idp-aspire-aspnetcore\Swiyu.Endpoints.Proxy\Swiyu.Endpoints.Proxy.csproj", "{2EFF790D-E7FD-38EA-54E7-47E80CE189D0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{4C1C66AE-F089-0A89-FE7F-A86DEC9A4148}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4C1C66AE-F089-0A89-FE7F-A86DEC9A4148}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4C1C66AE-F089-0A89-FE7F-A86DEC9A4148}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2EFF790D-E7FD-38EA-54E7-47E80CE189D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2EFF790D-E7FD-38EA-54E7-47E80CE189D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2EFF790D-E7FD-38EA-54E7-47E80CE189D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2EFF790D-E7FD-38EA-54E7-47E80CE189D0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
