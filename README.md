@@ -23,7 +23,7 @@
 - [Force step up authentication in web applications](https://damienbod.com/2026/01/26/force-step-up-authentication-in-web-applications/)
 - [Use client assertions in ASP.NET Core using OpenID Connect, OAuth DPoP and OAuth PAR](https://damienbod.com/2026/02/02/use-client-assertions-in-asp-net-core-using-openid-connect-oauth-dpop-and-oauth-par/)
 - [Secure the swiyu container using a YARP proxy](https://damienbod.com/2026/02/09/isolate-the-swiyu-public-beta-management-apis-using-yarp/)
-- [Add Application security to the swiyu generic management verifier APIs using OAuth](https://damienbod.com)
+- [Add Application security to the swiyu generic management verifier APIs using OAuth](https://damienbod.com/2026/02/16/add-application-security-to-the-swiyu-generic-management-verifier-apis-using-oauth/)
 
 ## Overview 
 A Duende identity server is used as an OpenID Connect server for web applications. When the user authenticates, the Swiss E-ID can be used as a second factor to authenticate.
