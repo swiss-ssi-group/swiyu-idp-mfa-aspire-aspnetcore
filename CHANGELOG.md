@@ -1,10 +1,13 @@
 
 # Change log
 
+## 2026-05-16
+- Updated packages
+
 ## 2026-02-27
 - Updated packages
 - data:image/png;base64
-- Swiyu updtaes
+- Swiyu updates
 
 ## 2026-02-15
 - Updated packages
