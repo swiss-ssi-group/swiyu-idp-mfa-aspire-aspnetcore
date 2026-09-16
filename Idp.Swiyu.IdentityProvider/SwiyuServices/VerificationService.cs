@@ -56,6 +56,7 @@ public class VerificationService
         _httpClient.SetBearerToken(accessToken);
 
         var idEncoded = HttpUtility.UrlEncode(verificationId);
+
         using HttpResponseMessage response = await _httpClient.GetAsync(
             $"{_swiyuVerifierMgmtUrl}/management/api/verifications/{idEncoded}");
 
@@ -112,8 +113,12 @@ public class VerificationService
     private async Task<string> SendCreateVerificationPostRequest(string json)
     {
         var jsonContent = new StringContent(json, Encoding.UTF8, "application/json");
-        var response = await _httpClient.PostAsync(
-                    $"{_swiyuVerifierMgmtUrl}/management/api/verifications", jsonContent);
+
+        var accessToken = await VerificationServiceSecurityClient.RequestTokenAsync(_configuration);
+        _httpClient.SetBearerToken(accessToken);
+
+        var response = await _httpClient.PostAsync($"{_swiyuVerifierMgmtUrl}/management/api/verifications", jsonContent);
+
         if (response.IsSuccessStatusCode)
         {
             var jsonResponse = await response.Content.ReadAsStringAsync();
