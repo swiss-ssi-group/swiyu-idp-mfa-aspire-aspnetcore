@@ -1,4 +1,6 @@
-﻿using System.Text;
+﻿using Duende.IdentityModel.Client;
+using System.Configuration;
+using System.Text;
 using System.Text.Json;
 using System.Web;
 
@@ -7,6 +9,8 @@ namespace Idp.Swiyu.IdentityProvider.SwiyuServices;
 public class VerificationService
 {
     private readonly ILogger<VerificationService> _logger;
+
+    private readonly IConfiguration _configuration;
     private readonly string? _swiyuVerifierMgmtUrl;
     private readonly string? _issuerId;
     private readonly HttpClient _httpClient;
@@ -18,6 +22,7 @@ public class VerificationService
         _issuerId = configuration["ISSUER_ID"];
         _httpClient = httpClientFactory.CreateClient();
         _logger = loggerFactory.CreateLogger<VerificationService>();
+        _configuration = configuration;
     }
 
     /// <summary>
@@ -47,6 +52,9 @@ public class VerificationService
 
     public async Task<VerificationManagementModel?> GetVerificationStatus(string verificationId)
     {
+        var accessToken = await VerificationServiceSecurityClient.RequestTokenAsync(_configuration);
+        _httpClient.SetBearerToken(accessToken);
+
         var idEncoded = HttpUtility.UrlEncode(verificationId);
         using HttpResponseMessage response = await _httpClient.GetAsync(
             $"{_swiyuVerifierMgmtUrl}/management/api/verifications/{idEncoded}");
@@ -60,6 +68,11 @@ public class VerificationService
                 _logger.LogError("GetVerificationStatus no data returned from Swiyu");
                 return null;
             }
+            else if (jsonResponse.Contains("FAILED"))
+            {
+                _logger.LogInformation("GetVerificationStatus verificationId FAILED: {jsonResponse}", jsonResponse);
+                return null;
+            }
 
             //  state: PENDING, SUCCESS, FAILED
             return JsonSerializer.Deserialize<VerificationManagementModel>(jsonResponse);
@@ -70,7 +83,6 @@ public class VerificationService
 
         throw new ArgumentException(error);
     }
-
     /// <summary>
     /// In a business app we can use the data from the verificationModel
     /// Verification data:
