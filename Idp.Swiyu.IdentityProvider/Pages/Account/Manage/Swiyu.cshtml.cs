@@ -32,6 +32,9 @@ public class RegisterSwiyuModel : PageModel
     [BindProperty]
     public byte[] QrCodePng { get; set; } = [];
 
+    [BindProperty]
+    public string? DeepLink { get; set; } = string.Empty;
+
     public RegisterSwiyuModel(VerificationService verificationService,
         IConfiguration configuration,
         IHttpClientFactory clientFactory,
@@ -67,6 +70,8 @@ public class RegisterSwiyuModel : PageModel
 
         var qrCode = QrCode.EncodeText(verificationResponse!.verification_deeplink, QrCode.Ecc.Quartile);
         QrCodePng = qrCode.ToPng(20, 4, MagickColors.Black, MagickColors.White);
+
+        DeepLink = verificationResponse.verification_deeplink;
 
         VerificationId = verificationResponse.id;
     }

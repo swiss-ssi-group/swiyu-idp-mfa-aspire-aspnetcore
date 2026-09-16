@@ -44,6 +44,9 @@ public class ForgotPasswordSwiyuModel : PageModel
     [BindProperty]
     public byte[]? QrCodePng { get; set; } = [];
 
+    [BindProperty]
+    public string? DeepLink { get; set; } = string.Empty;
+
     public ForgotPasswordSwiyuModel(
         IIdentityServerInteractionService interaction,
         IAuthenticationSchemeProvider schemeProvider,
@@ -92,6 +95,8 @@ public class ForgotPasswordSwiyuModel : PageModel
         QrCodePng = qrCode.ToPng(20, 4, MagickColors.Black, MagickColors.White);
 
         VerificationId = verificationResponse.id;
+
+        DeepLink = verificationResponse.verification_deeplink;
 
         return Page();
     }
