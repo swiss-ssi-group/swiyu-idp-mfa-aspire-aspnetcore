@@ -36,8 +36,10 @@ public class VerificationService
         var inputDescriptorsId = Guid.NewGuid().ToString();
         var presentationDefinitionId = "00000000-0000-0000-0000-000000000000"; // Guid.NewGuid().ToString();
 
-        var json = GetBetaIdVerificationPresentationBody(inputDescriptorsId,
-            presentationDefinitionId, acceptedIssuerDid, "betaid-sdjwt");
+        var json = GetBetaIdVerificationPresentationBodyV4(inputDescriptorsId,
+            presentationDefinitionId, acceptedIssuerDid);
+
+        // TODO sign the payload if JWT authentication is enabled on Swiyu  
 
         return await SendCreateVerificationPostRequest(json);
     }
@@ -114,6 +116,8 @@ public class VerificationService
     }
 
     /// <summary>
+    /// > **Note:** The verifier accepts both `dc+sd-jwt` (current spec, SD-JWT VC Draft 06+, per [draft-ietf-oauth-sd-jwt-vc-09 §A.2.1](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-sd-jwt-vc-09#name-application-dcsd-jwt)) 
+    /// and `vc+sd-jwt` (legacy SD-JWT VC drafts ≤ 05) on the credential's `typ` header.
     /// There will be private companies having a need to do identification routines (e.g. KYC or before issuing another credential), 
     /// asking for given_name, family_name, birth_date and birth_place.
     /// 
@@ -122,46 +126,39 @@ public class VerificationService
     /// { "path": ["$.family_name"] },
     /// { "path": ["$.birth_place"] },
     /// </summary>
-    private static string GetBetaIdVerificationPresentationBody(string inputDescriptorsId, string presentationDefinitionId, string acceptedIssuerDid, string vcType)
+    private static string GetBetaIdVerificationPresentationBodyV4(string inputDescriptorsId, string presentationDefinitionId, string acceptedIssuerDid)
     {
         var json = $$"""
              {
                  "accepted_issuer_dids": [ "{{acceptedIssuerDid}}" ],
-                 "response_mode": "direct_post",
-                 "presentation_definition": {
-                     "id": "{{presentationDefinitionId}}",
-                     "input_descriptors": [
-                         {
-                             "id": "{{inputDescriptorsId}}",
-                             "format": {
-                                 "vc+sd-jwt": {
-                                     "sd-jwt_alg_values": [
-                                         "ES256"
-                                     ],
-                                     "kb-jwt_alg_values": [
-                                         "ES256"
-                                     ]
-                                 }
-                             },
-                             "constraints": {
-             	                "fields": [
-             		                {
-             			                "path": [
-             				                "$.vct"
-             			                ],
-             			                "filter": {
-             				                "type": "string",
-             				                "const": "{{vcType}}"
-             			                }
-             		                },
-             		                { "path": [ "$.birth_date" ] },
-             		                { "path": [ "$.given_name" ] },
-             		                { "path": [ "$.family_name" ] },
-             		                { "path": [ "$.birth_place" ] }
-             	                ]
-                             }
-                         }
-                     ]
+                 "jwt_secured_authorization_request": true,
+                 "response_mode": "direct_post.jwt",
+                 "verification_purpose": {
+                   "scope": "ch.identity",
+                   "purpose_name": {
+                     "default": "Identity verification"
+                   },
+                   "purpose_description": {
+                     "default": "Used to verify the identity of an individual"
+                   }
+                 },
+                 "dcql_query": {
+                   "credentials": [
+                     {
+                       "id": "{{presentationDefinitionId}}",
+                       "format": "dc+sd-jwt",
+                       "meta": {
+                         "vct_values": ["urn:vct:ch.admin.bcs.betaid"]
+                       },
+                       "claims": [
+                         { "path": [ "birth_date" ] },
+                         { "path": [ "given_name" ] },
+                         { "path": [ "family_name" ] },
+                         { "path": [ "birth_place" ] }
+                       ],
+                       "require_cryptographic_holder_binding": true
+                     }
+                   ]
                  }
              }
              """;
