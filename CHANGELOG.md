@@ -3,7 +3,7 @@
 
 ## 2026-09-16
 - Updated packages
-- Swiyu 4.2.0
+- Swiyu 4.2.0, updated swiyu configurations, using secure management APIs
 
 ## 2026-05-16
 - Updated packages
