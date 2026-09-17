@@ -64,6 +64,12 @@ swiyuProxy = builder.AddProject<Projects.Swiyu_Endpoints_Proxy>("swiyu-endpoints
     .WithEnvironment("SwiyuVerifierMgmtUrl", swiyuVerifier.GetEndpoint(HTTP))
     .WithExternalHttpEndpoints();
 
+var swiyuManagementClientId = builder.AddParameter("SwiyuManagementClientId");
+var swiyuManagementClientSecretEntra = builder.AddParameter("SwiyuManagementClientSecretEntra", true);
+var swiyuManagementAuthority = builder.AddParameter("SwiyuManagementAuthority");
+var swiyuManagementScope = builder.AddParameter("SwiyuManagementScope");
+var webClientUrl = builder.AddParameter("WebClientUrl");
+
 identityProvider = builder.AddProject<Projects.Idp_Swiyu_IdentityProvider>(IDENTITY_PROVIDER)
     .WithExternalHttpEndpoints()
     .WithReference(cache)
@@ -71,6 +77,10 @@ identityProvider = builder.AddProject<Projects.Idp_Swiyu_IdentityProvider>(IDENT
     .WithEnvironment("SwiyuVerifierMgmtUrl", swiyuVerifier.GetEndpoint(HTTP))
     .WithEnvironment("SwiyuOid4vpUrl", verifierExternalUrl)
     .WithEnvironment("ISSUER_ID", issuerId)
+    .WithEnvironment("SwiyuManagementClientId", swiyuManagementClientId)
+    .WithEnvironment("SwiyuManagementClientSecretEntra", swiyuManagementClientSecretEntra)
+    .WithEnvironment("SwiyuManagementAuthority", swiyuManagementAuthority)
+    .WithEnvironment("SwiyuManagementScope", swiyuManagementScope)
     .WaitFor(swiyuVerifier)
     .WaitFor(swiyuProxy);
 
